@@ -1,5 +1,5 @@
 {
-  "name": "trip",
+  "name": "hono-svelte-5",
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
