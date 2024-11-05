@@ -1,0 +1,25 @@
+{
+  "name": "@root/backend",
+  "scripts": {
+    "dev": "wrangler dev --port 8000",
+    "deploy": "wrangler deploy --minify",
+    "type": "bunx wrangler types --env-interface WorkerEnv ./src/lib/types/worker.d.ts",
+    "db:generate": "bunx drizzle-kit generate",
+    "db:migrate": "bunx wrangler d1 migrations apply DB --local",
+    "db:migrate:remote": "bunx wrangler d1 migrations apply DB --remote",
+    "push": "bun run db:generate && bun run db:migrate",
+    "push:remote": "bun run db:generate && bun run db:migrate:remote"
+  },
+  "dependencies": {
+    "@hono/zod-validator": "^0.4.1",
+    "drizzle-orm": "^0.36.0",
+    "nanoid": "^5.0.8",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241022.0",
+    "better-sqlite3": "^11.5.0",
+    "drizzle-kit": "^0.27.0",
+    "wrangler": "^3.83.0"
+  }
+}
