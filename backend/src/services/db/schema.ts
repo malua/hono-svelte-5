@@ -8,6 +8,9 @@ const users = sqliteTable("user", {
   id,
   name: text().notNull().notNull().default(""),
   email: text().notNull().unique(),
+  hashedPassword: text("hashed_password").notNull(),
+  isAdmin: integer("is_admin", { mode: "boolean" }).notNull().default(false),
+  createdAt,
 });
 
 const posts = sqliteTable("post", {
@@ -18,7 +21,6 @@ const posts = sqliteTable("post", {
   authorId: text("author_id")
     .notNull()
     .references(() => users.id),
-
   likes: integer().default(0),
   createdAt,
   updatedAt,
@@ -38,11 +40,4 @@ export type NewUser = typeof users.$inferInsert;
 export type Post = typeof posts.$inferSelect;
 export type NewPost = typeof posts.$inferInsert;
 
-export { users, posts, userRelations, postRelations };
-
-export default {
-  users,
-  posts,
-  userRelations,
-  postRelations,
-};
+export { postRelations, posts, userRelations, users };

@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1730494463183,
-      "tag": "0000_serious_proudstar",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1730494496492,
-      "tag": "0001_secret_mephisto",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1730543974931,
-      "tag": "0002_pretty_sleeper",
+      "when": 1732364630459,
+      "tag": "0000_shiny_grim_reaper",
       "breakpoints": true
     }
   ]

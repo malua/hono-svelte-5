@@ -1,1 +1,0 @@
-ALTER TABLE `post` ADD `likes` integer DEFAULT 0;

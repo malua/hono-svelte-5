@@ -8,7 +8,7 @@
 <Button
 	onclick={async () => {
 		try {
-			const res = await api.createUser.$post({ json: { email: 'test@tesssts.cp', name: 'John' } });
+			const res = await api.user.$post({ json: { email: 'test@tesssts.cp', name: 'John' } });
 			const data = await res.json();
 			if (!res.ok) return toastResponseError(data);
 			toast.success(`User with id ${data.id} created`);
