@@ -1,13 +1,17 @@
 import { router } from "@backend/router";
 import { factory } from "@backend/lib/utils/factory";
-import { errorHandler } from "@backend/lib/utils/error";
+import { errorMiddleware } from "@backend/services/error";
 import { dbMiddleware } from "@backend/services/db";
+import { authenticationMiddleware } from "@backend/services/auth/authentication-middleware";
+import { authorizationMiddleware } from "@backend/services/auth/authorization-middleware";
 
 const app = factory
   //
   .createApp()
-  .onError(errorHandler)
+  .onError(errorMiddleware)
   .use(dbMiddleware)
+  .use(authenticationMiddleware)
+  .use(authorizationMiddleware)
   .route("/api", router);
 
 export default app;

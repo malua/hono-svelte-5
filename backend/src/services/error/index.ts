@@ -4,10 +4,10 @@ import { ErrorHandler } from "hono";
 const fail = (
   code: StatusCode,
   message: string,
-  additionalData?: { res: Response; cause: Error }
+  additionalData?: { res: Response; cause: Error },
 ) => new HTTPException(code, { message, ...additionalData });
 
-const errorHandler: ErrorHandler = (err, c) => {
+const errorMiddleware: ErrorHandler = (err, c) => {
   console.info("err", err);
   if (err instanceof HTTPException) {
     const { status, message } = err;
@@ -15,4 +15,4 @@ const errorHandler: ErrorHandler = (err, c) => {
   }
   return c.json({ error: "Internal Server Error" }, { status: 500 });
 };
-export { errorHandler, fail };
+export { errorMiddleware, fail };
