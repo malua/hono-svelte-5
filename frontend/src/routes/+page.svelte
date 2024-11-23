@@ -5,7 +5,7 @@
 	import { toastResponseError } from '@/lib/utils/error';
 </script>
 
-<Button
+<!-- <Button
 	onclick={async () => {
 		try {
 			const res = await api.user.$post({ json: { email: 'test@tesssts.cp', name: 'John' } });
@@ -17,4 +17,4 @@
 			toast.error("couldn't create user");
 		}
 	}}>Click me</Button
->
+> -->

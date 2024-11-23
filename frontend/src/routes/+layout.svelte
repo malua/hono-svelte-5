@@ -4,6 +4,7 @@
 	let { children } = $props();
 </script>
 
-{@render children()}
-
+<main class="w-full h-screen overflow-hidden">
+	{@render children()}
+</main>
 <Toaster richColors />

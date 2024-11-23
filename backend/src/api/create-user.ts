@@ -4,14 +4,15 @@ import { gen } from "@backend/lib/utils/generator";
 import { z } from "zod";
 import * as schema from "@backend/services/db/schema";
 import { auth } from "@backend/services/auth";
+import { validators } from "@backend/lib/utils/validators";
 
 const createUser = factory.createHandlers(
   zValidator(
     "json",
     z.object({
-      name: z.string().max(255).optional(),
-      email: z.string().email().max(255),
-      password: z.string().min(8).max(255),
+      name: validators.name().optional(),
+      email: validators.email(),
+      password: validators.password(),
     }),
   ),
   async (c) => {
