@@ -13,16 +13,16 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@hono/zod-validator": "^0.4.1",
+    "@hono/zod-validator": "^0.4.2",
     "drizzle-orm": "^0.36.4",
-    "nanoid": "^5.0.8",
+    "nanoid": "^5.0.9",
     "oslo": "^1.2.1",
-    "zod": "^3.23.8"
+    "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20241112.0",
-    "better-sqlite3": "^11.5.0",
+    "@cloudflare/workers-types": "^4.20250204.0",
+    "better-sqlite3": "^11.8.1",
     "drizzle-kit": "^0.27.2",
-    "wrangler": "^3.90.0"
+    "wrangler": "^3.107.3"
   }
 }

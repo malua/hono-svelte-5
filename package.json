@@ -1,33 +1,23 @@
 {
   "name": "hono-svelte-5",
   "version": "1.0.0",
-  "description": "A full-stack project using Hono as the backend framework and Svelte 5 for the frontend.",
-  "main": "index.ts",
-  "module": "index.ts",
-  "type": "module",
-  "scripts": {},
+  "author": "Moshe Rivkin",
   "repository": {
     "type": "git",
     "url": "https://github.com/yourusername/hono-svelte-5.git"
   },
-  "author": "Moshe Rivkin",
-  "license": "MIT",
+  "main": "index.ts",
+  "module": "index.ts",
+  "dependencies": {
+    "hono": "^4.7.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.7.2"
+  },
   "bugs": {
     "url": "https://github.com/mosherivkin/hono-svelte-5/issues"
   },
-  "peerDependencies": {
-    "typescript": "^5.6.3"
-  },
-  "workspaces": [
-    "backend",
-    "frontend"
-  ],
-  "dependencies": {
-    "hono": "^4.6.11"
-  },
-  "devDependencies": {
-    "concurrently": "^9.1.0"
-  },
+  "description": "A full-stack project using Hono as the backend framework and Svelte 5 for the frontend.",
   "keywords": [
     "Hono",
     "Svelte 5",
@@ -38,5 +28,12 @@
     "Zod",
     "Tailwind CSS",
     "ShadCN-Svelte"
+  ],
+  "license": "MIT",
+  "scripts": {},
+  "type": "module",
+  "workspaces": [
+    "backend",
+    "frontend"
   ]
 }
