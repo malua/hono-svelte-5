@@ -1,5 +1,5 @@
 {
-  "name": "@root/backend",
+  "name": "backend",
   "scripts": {
     "dev": "wrangler dev --port 8000",
     "deploy": "wrangler deploy --minify",
@@ -13,16 +13,15 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@hono/zod-validator": "^0.4.2",
-    "drizzle-orm": "^0.36.4",
-    "nanoid": "^5.0.9",
-    "oslo": "^1.2.1",
-    "zod": "^3.24.1"
+    "@hono/zod-validator": "^0.4.3",
+    "@libsql/client": "^0.14.0",
+    "date-fns": "^4.1.0",
+    "drizzle-orm": "^0.40.0",
+    "hono": "^4.7.4"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250204.0",
-    "better-sqlite3": "^11.8.1",
-    "drizzle-kit": "^0.27.2",
-    "wrangler": "^3.107.3"
+    "@cloudflare/workers-types": "^4.20250214.0",
+    "drizzle-kit": "^0.30.5",
+    "wrangler": "^3.109.2"
   }
 }

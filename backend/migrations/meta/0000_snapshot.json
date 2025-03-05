@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "04141588-2b8e-4fc3-8e2f-521b016c0e29",
+  "id": "fba0c594-faf6-4319-801b-7bdcf8cad39e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "post": {
@@ -36,8 +36,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "author_id": {
-          "name": "author_id",
+        "authorId": {
+          "name": "authorId",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -57,7 +57,7 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
-          "default": "(unixepoch())"
+          "default": "current_timestamp"
         },
         "updated_at": {
           "name": "updated_at",
@@ -65,17 +65,17 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
-          "default": "(unixepoch())"
+          "default": "current_timestamp"
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "post_author_id_user_id_fk": {
-          "name": "post_author_id_user_id_fk",
+        "post_authorId_user_id_fk": {
+          "name": "post_authorId_user_id_fk",
           "tableFrom": "post",
           "tableTo": "user",
           "columnsFrom": [
-            "author_id"
+            "authorId"
           ],
           "columnsTo": [
             "id"
@@ -113,15 +113,15 @@
           "notNull": true,
           "autoincrement": false
         },
-        "hashed_password": {
-          "name": "hashed_password",
+        "hashedPassword": {
+          "name": "hashedPassword",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "is_admin": {
-          "name": "is_admin",
+        "isAdmin": {
+          "name": "isAdmin",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
@@ -134,7 +134,7 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false,
-          "default": "(unixepoch())"
+          "default": "current_timestamp"
         }
       },
       "indexes": {

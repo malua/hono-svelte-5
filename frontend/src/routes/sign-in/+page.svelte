@@ -1,6 +1,6 @@
 <script lang="ts">
-	import BigQuote from '@/lib/components/core/big-quote.svelte';
-	import TealBackground from '@/lib/components/core/teal-background.svelte';
+	import BigQuote from '@/lib/components/base/big-quote.svelte';
+	import TealBackground from '@/lib/components/base/teal-background.svelte';
 	import { Button } from '@/lib/components/ui/button/index.js';
 	import { Input } from '@/lib/components/ui/input/index.js';
 	import { Label } from '@/lib/components/ui/label/index.js';
@@ -11,9 +11,7 @@
 		<div class="mx-auto grid w-[350px] gap-6">
 			<div class="grid gap-2 text-center">
 				<h1 class="text-3xl font-bold">Sign In</h1>
-				<p class="text-muted-foreground text-balance">
-					Enter your email below to login to your account
-				</p>
+				<p class="text-muted-foreground text-balance">Enter your email below to login to your account</p>
 			</div>
 			<div class="grid gap-4">
 				<div class="grid gap-2">
@@ -36,12 +34,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="hidden lg:block relative">
+	<div class="relative hidden lg:block">
 		<TealBackground>
-			<BigQuote>
-				If security were all that mattered, computers would never be turned on, let alone hooked
-				into a network with literally millions of potential intruders.
-			</BigQuote>
+			<BigQuote>If security were all that mattered, computers would never be turned on, let alone hooked into a network with literally millions of potential intruders.</BigQuote>
 		</TealBackground>
 	</div>
 </div>

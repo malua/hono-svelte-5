@@ -1,14 +1,14 @@
 import { HTTPException } from "hono/http-exception";
-import { StatusCode } from "hono/utils/http-status";
+import { ContentfulStatusCode } from "hono/utils/http-status";
 import { ErrorHandler } from "hono";
 const fail = (
-  code: StatusCode,
+  code: ContentfulStatusCode,
   message: string,
-  additionalData?: { res: Response; cause: Error },
+  additionalData?: { res: Response; cause: Error }
 ) => new HTTPException(code, { message, ...additionalData });
 
 const errorMiddleware: ErrorHandler = (err, c) => {
-  console.info("err", err);
+  console.info("error: ", err);
   if (err instanceof HTTPException) {
     const { status, message } = err;
     return c.json({ error: message }, { status });

@@ -5,14 +5,15 @@ import { sign, verify } from "hono/jwt";
 import { JWTPayload } from "hono/utils/jwt/types";
 
 export const tokenActions = {
-  create: async (
-    payload: NonNullable<EnvUser>,
-    c: Context,
-  ): Promise<string> => {
+  async create(payload: NonNullable<EnvUser>, c: Context) {
+    if (!c.env.JWT_ACCESS_SECRET)
+      throw new Error("Please add JWT_ACCESS_SECRET to your .dev.vars file");
     return await sign(payload, c.env.JWT_ACCESS_SECRET, "HS256");
   },
 
-  verify: async (token: string, c: Context) => {
+  async verify(token: string, c: Context) {
+    if (!c.env.JWT_ACCESS_SECRET)
+      throw new Error("Please add JWT_ACCESS_SECRET to your .dev.vars file");
     try {
       const jwt = await verify(token, c.env.JWT_ACCESS_SECRET, "HS256");
       return jwt as JWTPayload & { payload: NonNullable<EnvUser> };
@@ -21,7 +22,7 @@ export const tokenActions = {
     }
   },
 
-  saveToCookie: (token: string, c: Context) => {
+  saveToCookie(token: string, c: Context) {
     setCookie(c, "access-token", token, {
       httpOnly: true,
       secure: true,
@@ -30,14 +31,14 @@ export const tokenActions = {
       expires: new Date(gen.x_hours_from_now_in_ms(1)),
     });
   },
-  loadFromCookie: async (c: Context) => {
+  async loadFromCookie(c: Context) {
     const tokenCookie = getCookie(c, "access-token");
     if (!tokenCookie) {
       throw new Error("No token found in cookie");
     }
     return await tokenActions.verify(tokenCookie, c);
   },
-  delete(c: Context): void {
+  delete(c: Context) {
     deleteCookie(c, "accessToken");
   },
 };

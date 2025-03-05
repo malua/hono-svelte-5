@@ -1,13 +1,50 @@
-import { Argon2id } from "oslo/password";
-
-const argon2id = new Argon2id();
-
 export const passwordActions = {
-  async hash(password: string): Promise<string> {
-    return await argon2id.hash(password);
+  async hash(password: string, existingSalt?: Uint8Array) {
+    const encoder = new TextEncoder();
+    const salt = existingSalt ?? crypto.getRandomValues(new Uint8Array(16));
+    const keyMaterial = await crypto.subtle.importKey(
+      "raw",
+      encoder.encode(password),
+      { name: "PBKDF2" },
+      false,
+      ["deriveBits", "deriveKey"]
+    );
+    const key = await crypto.subtle.deriveKey(
+      {
+        name: "PBKDF2",
+        salt: salt,
+        iterations: 100000,
+        hash: "SHA-256",
+      },
+      keyMaterial,
+      { name: "AES-GCM", length: 256 },
+      true,
+      ["encrypt", "decrypt"]
+    );
+    const exportedKey = (await crypto.subtle.exportKey(
+      "raw",
+      key
+    )) as ArrayBuffer;
+    const hashBuffer = new Uint8Array(exportedKey);
+    const hashArray = Array.from(hashBuffer);
+    const hashHex = hashArray
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+    const saltHex = Array.from(salt)
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+    return `${saltHex}:${hashHex}`;
   },
 
-  async verify(password: string, storedHash: string): Promise<boolean> {
-    return await argon2id.verify(storedHash, password);
+  async verify(password: string, storedHash: string) {
+    const [saltHex, originalHash] = storedHash.split(":");
+    const matchResult = saltHex.match(/.{1,2}/g);
+    if (!matchResult) {
+      throw new Error("Invalid salt format");
+    }
+    const salt = new Uint8Array(matchResult.map((byte) => parseInt(byte, 16)));
+    const attemptHashWithSalt = await passwordActions.hash(password, salt);
+    const [, attemptHash] = attemptHashWithSalt.split(":");
+    return attemptHash === originalHash;
   },
 };

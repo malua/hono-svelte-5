@@ -8,11 +8,11 @@ import { authorizationMiddleware } from "@backend/services/auth/authorization-mi
 const app = factory
   //
   .createApp()
-  .onError(errorMiddleware)
   .use(dbMiddleware)
   .use(authenticationMiddleware)
   .use(authorizationMiddleware)
-  .route("/api", router);
+  .route("/api", router)
+  .onError(errorMiddleware);
 
 export default app;
 

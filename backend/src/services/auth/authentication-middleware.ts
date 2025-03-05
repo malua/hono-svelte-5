@@ -1,7 +1,6 @@
 import { factory } from "@backend/lib/utils/factory";
 import { gen } from "@backend/lib/utils/generator";
-import { auth } from ".";
-
+import { auth } from "@backend/services/auth";
 export const authenticationMiddleware = factory.createMiddleware(
   async (c, next) => {
     try {
@@ -13,9 +12,9 @@ export const authenticationMiddleware = factory.createMiddleware(
       }
       c.set("user", jwt.payload);
     } catch (error) {
-      console.info("authentication middleware error:", error);
+      console.info("user not authenticated.");
       c.set("user", null);
     }
     await next();
-  },
+  }
 );
