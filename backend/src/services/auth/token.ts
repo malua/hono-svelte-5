@@ -6,16 +6,16 @@ import { JWTPayload } from "hono/utils/jwt/types";
 
 export const tokenActions = {
   async create(payload: NonNullable<EnvUser>, c: Context) {
-    if (!c.env.JWT_ACCESS_SECRET)
-      throw new Error("Please add JWT_ACCESS_SECRET to your .dev.vars file");
-    return await sign(payload, c.env.JWT_ACCESS_SECRET, "HS256");
+    if (!c.env.JWT_SECRET)
+      throw new Error("Please add JWT_SECRET to your .dev.vars file");
+    return await sign(payload, c.env.JWT_SECRET, "HS256");
   },
 
   async verify(token: string, c: Context) {
-    if (!c.env.JWT_ACCESS_SECRET)
-      throw new Error("Please add JWT_ACCESS_SECRET to your .dev.vars file");
+    if (!c.env.JWT_SECRET)
+      throw new Error("Please add JWT_SECRET to your .dev.vars file");
     try {
-      const jwt = await verify(token, c.env.JWT_ACCESS_SECRET, "HS256");
+      const jwt = await verify(token, c.env.JWT_SECRET, "HS256");
       return jwt as JWTPayload & { payload: NonNullable<EnvUser> };
     } catch {
       throw new Error("Invalid or expired token");

@@ -35,12 +35,12 @@ export const signIn = factory.createHandlers(
       return c.json({ error: "Invalid email or password" }, 401);
     }
 
-    const jwtAccessPayload = {
+    const accessTokenPayload = {
       exp: gen.x_hours_from_now_in_sec(1),
       ...userData,
       hashedPassword: undefined,
     };
-    const accessToken = await auth.token.create(jwtAccessPayload, c);
+    const accessToken = await auth.token.create(accessTokenPayload, c);
     auth.token.saveToCookie(accessToken, c);
     return c.json({ success: true });
   }
