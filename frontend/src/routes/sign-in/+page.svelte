@@ -7,9 +7,9 @@
 	import { sighInPageHandler } from './page.svelte';
 </script>
 
-<div class="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
-	<div class="flex items-center justify-center py-12">
-		<div class="mx-auto grid w-[350px] gap-6">
+<div class="h-screen w-full lg:grid lg:grid-cols-2">
+	<div class="flex h-full items-center justify-center py-12">
+		<div class="mx-auto grid min-w-xs gap-6">
 			<div class="grid gap-2 text-center">
 				<h1 class="text-3xl font-bold">Sign In</h1>
 				<p class="text-muted-foreground text-balance">Enter your email below to login to your account</p>
