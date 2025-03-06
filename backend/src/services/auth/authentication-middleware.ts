@@ -14,6 +14,7 @@ export const authenticationMiddleware = factory.createMiddleware(
     } catch (error) {
       console.info("user not authenticated.");
       c.set("user", null);
+      auth.token.delete(c);
     }
     await next();
   }

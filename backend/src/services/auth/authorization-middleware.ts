@@ -9,6 +9,7 @@ const exposers: Exposer[] = [
   (c) => !!c.var.user?.isAdmin,
   (c) => c.req.path === "/api/user/signIn" && c.req.method === "POST",
   (c) => c.req.path === "/api/user/signUp" && c.req.method === "POST",
+  (c) => c.req.path === "/api/user/signOut" && c.req.method === "POST",
 ];
 
 export const authorizationMiddleware = factory.createMiddleware(

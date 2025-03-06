@@ -2,13 +2,12 @@ import { goto } from '$app/navigation';
 import { api } from '@/lib/utils/api';
 import { toastResponseError } from '@/lib/utils/error';
 
-class SighUpPageHandler {
-	name = $state('');
+class SighInPageHandler {
 	email = $state('');
 	password = $state('');
 
-	signUp = async () => {
-		const serverRes = await api.user.signUp.$post({ json: { email: this.email, password: this.password, name: this.name } });
+	signIn = async () => {
+		const serverRes = await api.user.signIn.$post({ json: { email: this.email, password: this.password } });
 		const serverResData = await serverRes.json();
 		if (!serverRes.ok) {
 			toastResponseError(serverResData);
@@ -18,4 +17,4 @@ class SighUpPageHandler {
 	};
 }
 
-export const sighUpPageHandler = new SighUpPageHandler();
+export const sighInPageHandler = new SighInPageHandler();

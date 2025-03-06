@@ -27,7 +27,7 @@ export const signUp = factory.createHandlers(
 
     const id = gen.id();
     const passwordHash = await auth.password.hash(requestPayload.password);
-    const [userData] = await c.var.db
+    const [{ hashedPassword: _, ...userData }] = await c.var.db
       .insert(schema.users)
       .values({
         id,
@@ -40,11 +40,11 @@ export const signUp = factory.createHandlers(
     const jwtAccessPayload = {
       exp: gen.x_hours_from_now_in_sec(1),
       ...userData,
-      hashedPassword: undefined,
     };
 
     const accessToken = await auth.token.create(jwtAccessPayload, c);
+    auth.token.saveUserToCookie(userData, c);
     auth.token.saveToCookie(accessToken, c);
-    return c.json({ id });
+    return c.json(null);
   }
 );

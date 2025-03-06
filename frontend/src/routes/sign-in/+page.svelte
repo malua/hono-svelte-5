@@ -4,6 +4,7 @@
 	import { Button } from '@/lib/components/ui/button/index.js';
 	import { Input } from '@/lib/components/ui/input/index.js';
 	import { Label } from '@/lib/components/ui/label/index.js';
+	import { sighInPageHandler } from './page.svelte';
 </script>
 
 <div class="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
@@ -16,16 +17,16 @@
 			<div class="grid gap-4">
 				<div class="grid gap-2">
 					<Label for="email">Email</Label>
-					<Input id="email" type="email" placeholder="m@example.com" required />
+					<Input id="email" bind:value={sighInPageHandler.email} type="email" placeholder="m@example.com" required />
 				</div>
 				<div class="grid gap-2">
 					<div class="flex items-center">
 						<Label for="password">Password</Label>
 						<a href="##" class="ml-auto inline-block text-sm underline"> Forgot your password? </a>
 					</div>
-					<Input id="password" type="password" required />
+					<Input id="password" bind:value={sighInPageHandler.password} type="password" required />
 				</div>
-				<Button type="submit" class="w-full">Login</Button>
+				<Button type="submit" class="w-full" onclick={sighInPageHandler.signIn}>Login</Button>
 				<Button variant="outline" class="w-full">Login with Google</Button>
 			</div>
 			<div class="mt-4 text-center text-sm">

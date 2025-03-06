@@ -31,6 +31,15 @@ export const tokenActions = {
       expires: new Date(gen.x_hours_from_now_in_ms(1)),
     });
   },
+  saveUserToCookie(user: EnvUser, c: Context) {
+    setCookie(c, "user-data", encodeURI(JSON.stringify(user)), {
+      httpOnly: false,
+      secure: true,
+      sameSite: "strict",
+      path: "/",
+      expires: new Date(gen.x_hours_from_now_in_ms(1)),
+    });
+  },
   async loadFromCookie(c: Context) {
     const tokenCookie = getCookie(c, "access-token");
     if (!tokenCookie) {
@@ -39,6 +48,7 @@ export const tokenActions = {
     return await tokenActions.verify(tokenCookie, c);
   },
   delete(c: Context) {
-    deleteCookie(c, "accessToken");
+    deleteCookie(c, "access-token");
+    deleteCookie(c, "user-data");
   },
 };
