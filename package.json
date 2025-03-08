@@ -29,6 +29,7 @@
     "Drizzle ORM",
     "Zod",
     "Tailwind CSS",
+    "Tailwind 4",
     "ShadCN-Svelte"
   ],
   "license": "MIT",

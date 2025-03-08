@@ -11,6 +11,7 @@ export function authBasedRedirection() {
 	const publicPaths = [...authPaths]; // and more...
 	const isPublicPath = publicPaths.includes(page.url.pathname);
 	const isAuthPath = authPaths.includes(page.url.pathname);
+
 	if (!user && !isPublicPath) {
 		goto('/sign-in');
 	}

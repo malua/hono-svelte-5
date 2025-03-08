@@ -9,7 +9,7 @@ A full-stack project using **Hono** as the backend framework and **Svelte 5** as
 - 📦 SQLite database with Cloudflare D1
 - 🔒 Type-safe database operations with Drizzle ORM
 - ✨ Beautiful UI components with ShadCN-Svelte
-- 🎨 Styling with Tailwind CSS
+- 🎨 Styling with Tailwind CSS V4
 - 📝 Schema validation with Zod
 - 🔐 Authentication and authorization
 - 🌐 API route handling
