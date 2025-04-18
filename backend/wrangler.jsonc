@@ -11,9 +11,9 @@
   // },
   "kv_namespaces": [
     {
-      "binding": "KV",
-      "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    }
+      "binding": "KVSoftwareList",
+      "id": "5655c7cf550e452e98bf22a1500ff653",
+    },
   ],
   // "r2_buckets": [
   //   {
@@ -24,10 +24,10 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "example-database",
-      "database_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    }
-  ]
+      "database_name": "software-list-db",
+      "database_id": "b9084235-301d-4e48-b944-d1ecc4bcc2ce",
+    },
+  ],
   // "ai": {
   //   "binding": "AI"
   // },
