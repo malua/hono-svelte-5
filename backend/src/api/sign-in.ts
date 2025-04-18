@@ -12,7 +12,7 @@ export const signIn = factory.createHandlers(
     z.object({
       email: validators.email(),
       password: validators.password(),
-    })
+    }),
   ),
   async (c) => {
     const requestPayload = c.req.valid("json");
@@ -29,7 +29,7 @@ export const signIn = factory.createHandlers(
     const { hashedPassword, ...publicUserData } = userData;
     const validPassword = await auth.password.verify(
       requestPayload.password,
-      userData.hashedPassword
+      userData.hashedPassword,
     );
 
     if (!validPassword) {
@@ -37,11 +37,11 @@ export const signIn = factory.createHandlers(
     }
     const accessTokenPayload = {
       exp: gen.x_hours_from_now_in_sec(1),
-      ...publicUserData,
+      user: publicUserData,
     };
     const accessToken = await auth.token.create(accessTokenPayload, c);
     auth.token.saveUserToCookie(publicUserData, c);
     auth.token.saveToCookie(accessToken, c);
     return c.json(null);
-  }
+  },
 );

@@ -6,7 +6,6 @@ import { authenticationMiddleware } from "@backend/services/auth/authentication-
 import { authorizationMiddleware } from "@backend/services/auth/authorization-middleware";
 
 const app = factory
-  //
   .createApp()
   .use(dbMiddleware)
   .use(authenticationMiddleware)

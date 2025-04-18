@@ -6,6 +6,8 @@ import { z } from "zod";
 import { auth } from "@backend/services/auth";
 import { validators } from "@backend/lib/utils/validators";
 
+const allowedSignupEmails = ["lukas.mayr@posteo.at"];
+
 export const signUp = factory.createHandlers(
   zValidator(
     "json",
@@ -13,10 +15,14 @@ export const signUp = factory.createHandlers(
       name: validators.name(),
       email: validators.email(),
       password: validators.password(),
-    })
+    }),
   ),
   async (c) => {
     const requestPayload = c.req.valid("json");
+
+    if (!allowedSignupEmails.includes(requestPayload.email)) {
+      return c.json({ error: "Email not allowed" }, 400);
+    }
 
     const existingUser = await c.var.db.query.users.findFirst({
       where({ email }, { eq }) {
@@ -39,12 +45,12 @@ export const signUp = factory.createHandlers(
 
     const jwtAccessPayload = {
       exp: gen.x_hours_from_now_in_sec(1),
-      ...userData,
+      user: userData,
     };
 
     const accessToken = await auth.token.create(jwtAccessPayload, c);
     auth.token.saveUserToCookie(userData, c);
     auth.token.saveToCookie(accessToken, c);
     return c.json(null);
-  }
+  },
 );

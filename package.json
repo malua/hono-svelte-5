@@ -1,8 +1,10 @@
 {
   "name": "hono-svelte-5",
   "version": "1.0.0",
-  "author": "Moshe Rivkin",
-  "scripts": {},
+  "author": "Lukas Mayr",
+  "scripts": {
+    "dev": "bun dev --cwd frontend & bun dev --cwd backend"
+  },
   "main": "index.ts",
   "module": "index.ts",
   "dependencies": {
@@ -13,11 +15,11 @@
     "typescript": "^5.7.3"
   },
   "bugs": {
-    "url": "https://github.com/mosherivkin/hono-svelte-5/issues"
+    "url": "https://github.com/malua/hono-svelte-5/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/hono-svelte-5.git"
+    "url": "https://github.com/malua/hono-svelte-5.git"
   },
   "description": "A full-stack project using Hono as the backend framework and Svelte 5 for the frontend.",
   "keywords": [

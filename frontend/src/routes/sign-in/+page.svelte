@@ -1,13 +1,11 @@
 <script lang="ts">
-	import BigQuote from '@/lib/components/base/big-quote.svelte';
-	import TealBackground from '@/lib/components/base/teal-background.svelte';
 	import { Button } from '@/lib/components/ui/button/index.js';
 	import { Input } from '@/lib/components/ui/input/index.js';
 	import { Label } from '@/lib/components/ui/label/index.js';
 	import { sighInPageHandler } from './page.svelte';
 </script>
 
-<div class="h-screen w-full lg:grid lg:grid-cols-2">
+<div class="h-screen w-full">
 	<div class="flex h-full items-center justify-center py-12">
 		<div class="mx-auto grid min-w-xs gap-6">
 			<div class="grid gap-2 text-center">
@@ -22,22 +20,16 @@
 				<div class="grid gap-2">
 					<div class="flex items-center">
 						<Label for="password">Password</Label>
-						<a href="##" class="ml-auto inline-block text-sm underline"> Forgot your password? </a>
+						<!-- <a href="##" class="ml-auto inline-block text-sm underline"> Forgot your password? </a> -->
 					</div>
 					<Input id="password" bind:value={sighInPageHandler.password} type="password" required />
 				</div>
 				<Button type="submit" class="w-full" onclick={sighInPageHandler.signIn}>Login</Button>
-				<Button variant="outline" class="w-full">Login with Google</Button>
 			</div>
 			<div class="mt-4 text-center text-sm">
 				Don&apos;t have an account?
 				<a href="/sign-up" class="underline"> Sign up </a>
 			</div>
 		</div>
-	</div>
-	<div class="relative hidden lg:block">
-		<TealBackground>
-			<BigQuote>If security were all that mattered, computers would never be turned on, let alone hooked into a network with literally millions of potential intruders.</BigQuote>
-		</TealBackground>
 	</div>
 </div>

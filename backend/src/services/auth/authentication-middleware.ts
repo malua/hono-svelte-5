@@ -7,15 +7,15 @@ export const authenticationMiddleware = factory.createMiddleware(
       const jwt = await auth.token.loadFromCookie(c);
       if (!jwt.exp) throw new Error("No expiration date found");
       if (jwt.exp < gen.x_hours_from_now_in_sec(0.5)) {
-        const newToken = await auth.token.create(jwt.payload, c);
+        const newToken = await auth.token.create(jwt, c);
         auth.token.saveToCookie(newToken, c);
       }
-      c.set("user", jwt.payload);
+      c.set("user", jwt.user);
     } catch (error) {
       console.info("user not authenticated.");
       c.set("user", null);
       auth.token.delete(c);
     }
     await next();
-  }
+  },
 );

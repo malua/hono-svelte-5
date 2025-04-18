@@ -1,19 +1,16 @@
 <script lang="ts">
-	import BigQuote from '@/lib/components/base/big-quote.svelte';
-	import TealBackground from '@/lib/components/base/teal-background.svelte';
 	import { Button } from '@/lib/components/ui/button';
 	import { Input } from '@/lib/components/ui/input';
 	import { Label } from '@/lib/components/ui/label';
-	import { toast } from 'svelte-sonner';
 	import { sighUpPageHandler } from './page.svelte';
 </script>
 
-<div class="h-screen w-full lg:grid lg:grid-cols-2">
+<div class="h-screen w-full">
 	<div class="flex h-full items-center justify-center py-12">
 		<div class="mx-auto grid min-w-xs gap-6">
 			<div class="grid gap-2 text-center">
 				<h1 class="text-3xl font-bold">Sign Up</h1>
-				<p class="text-muted-foreground text-balance">Enter your details below to create your account</p>
+				<p class="text-muted-foreground text-balance">Sign up is only allowed for whitelisted email addresses.</p>
 			</div>
 			<div class="grid gap-4">
 				<div class="grid gap-2">
@@ -30,17 +27,11 @@
 					<Input id="password" bind:value={sighUpPageHandler.password} type="password" required autocomplete="new-password" />
 				</div>
 				<Button type="submit" class="w-full" onclick={sighUpPageHandler.signUp}>Create Account</Button>
-				<Button variant="outline" class="w-full cursor-not-allowed" onclick={() => toast.error('You trust Google? Really???')}>Sign up with Google</Button>
 			</div>
 			<div class="mt-4 text-center text-sm">
 				Already have an account?
 				<a href="/sign-in" class="underline"> Sign in </a>
 			</div>
 		</div>
-	</div>
-	<div class=" relative hidden lg:block">
-		<TealBackground>
-			<BigQuote author="Bob Alice">“Passwords are like underwear. Don’t let people see it, change it very often, and you shouldn’t share it with strangers”</BigQuote>
-		</TealBackground>
 	</div>
 </div>

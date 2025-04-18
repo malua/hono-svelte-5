@@ -8,7 +8,7 @@ export function authBasedRedirection() {
 	const user = JSON.parse(decodeURI(Cookies.get('user-data') ?? 'null')) as EnvUser;
 	userStore.setUser(user);
 	const authPaths = ['/sign-in', '/sign-up'];
-	const publicPaths = [...authPaths]; // and more...
+	const publicPaths = [...authPaths, '/']; // and more...
 	const isPublicPath = publicPaths.includes(page.url.pathname);
 	const isAuthPath = authPaths.includes(page.url.pathname);
 

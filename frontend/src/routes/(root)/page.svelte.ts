@@ -6,11 +6,13 @@ class RootPageHandler {
 	signOut = async () => {
 		const serverRes = await api.user.signOut.$post();
 		const serverResData = await serverRes.json();
+
 		if (!serverRes.ok) {
 			toastResponseError(serverResData);
 			return;
 		}
-		goto('/');
+		await goto('/');
+		window.location.reload();
 	};
 }
 

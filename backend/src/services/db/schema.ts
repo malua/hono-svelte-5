@@ -1,4 +1,10 @@
-import { int, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import {
+  int,
+  integer,
+  primaryKey,
+  sqliteTable,
+  text,
+} from "drizzle-orm/sqlite-core";
 import { relations, sql } from "drizzle-orm";
 
 const id = text().primaryKey().notNull();
@@ -17,27 +23,51 @@ export const users = sqliteTable("user", {
   isAdmin: integer({ mode: "boolean" }).notNull().default(false),
   createdAt,
 });
-export const posts = sqliteTable("post", {
+
+export const entries = sqliteTable("entries", {
   id,
-  title: text().notNull(),
-  description: text().notNull().default(""),
-  content: text().notNull(),
-  authorId: text()
-    .notNull()
-    .references(() => users.id),
-  likes: integer().default(0),
+  name: text().notNull(),
+  websiteUrl: text().default(""),
+  githubUrl: text().default(""),
   createdAt,
   updatedAt,
 });
 
-export const userRelations = relations(users, ({ many }) => ({
-  posts: many(posts),
+export const entryRelations = relations(entries, ({ many }) => ({
+  entryTags: many(entriesToTags),
 }));
-export const postRelations = relations(posts, ({ one }) => ({
-  author: one(users, { fields: [posts.authorId], references: [users.id] }),
+
+export const tags = sqliteTable("tags", {
+  id,
+  name: text().notNull(),
+});
+
+export const tagRelations = relations(tags, ({ many }) => ({
+  entries: many(entriesToTags),
+}));
+
+export const entriesToTags = sqliteTable(
+  "entries_to_tags",
+  {
+    entryId: text()
+      .notNull()
+      .references(() => entries.id),
+    tagId: text()
+      .notNull()
+      .references(() => tags.id),
+  },
+  (t) => [primaryKey({ columns: [t.entryId, t.tagId] })],
+);
+
+export const entriesToTagsRelations = relations(entriesToTags, ({ one }) => ({
+  entry: one(entries, {
+    fields: [entriesToTags.entryId],
+    references: [entries.id],
+  }),
+  tag: one(tags, { fields: [entriesToTags.tagId], references: [tags.id] }),
 }));
 
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
-export type Post = typeof posts.$inferSelect;
-export type NewPost = typeof posts.$inferInsert;
+export type Entry = typeof entries.$inferSelect;
+export type NewEntry = typeof entries.$inferInsert;
