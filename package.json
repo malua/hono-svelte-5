@@ -2,9 +2,7 @@
   "name": "hono-svelte-5",
   "version": "1.0.0",
   "author": "Lukas Mayr",
-  "scripts": {
-    "dev": "bun dev --cwd frontend & bun dev --cwd backend"
-  },
+  "scripts": {},
   "main": "index.ts",
   "module": "index.ts",
   "dependencies": {
