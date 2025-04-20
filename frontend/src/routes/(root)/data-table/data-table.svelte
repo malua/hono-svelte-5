@@ -7,7 +7,7 @@
 	import { api } from '@/lib/utils/api';
 	import userStore from '@/lib/stores/user.svelte';
 	import type { AnyPlugins } from 'svelte-headless-table/plugins';
-	import { Image } from '@/lib/components/ui/image';
+	import { Avatar } from '@/lib/components/ui/avatar';
 
 	const { software = [] } = $props();
 
@@ -20,13 +20,14 @@
 			id: 'icon',
 			accessor: 'websiteUrl',
 			header: '',
-			cell: ({ value }) => {
-				// Assuming the favicon is at the root as favicon.ico
-				const url = new URL(value);
-				return createRender(Image, {
-					src: `https://favicone.com/${url.hostname}?s=24`,
+			cell: ({ value, row }) => {
+				const name = row.cellForId['name'].value;
+				const hostName = value ? new URL(value).hostname : '';
+				const faviconUrl = value ? `https://favicone.com/${hostName}?s=24` : null;
+				return createRender(Avatar, {
+					src: faviconUrl,
 					alt: 'Favicon of ' + value,
-					class: ['w-6', 'h-6']
+					fallback: name?.substring(0, 2)
 				});
 			}
 		}),
