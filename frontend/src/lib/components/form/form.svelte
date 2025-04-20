@@ -64,6 +64,7 @@
 			});
 
 		isSubmitting = false;
+		window.location.reload();
 	}
 
 	function handleCancel() {
