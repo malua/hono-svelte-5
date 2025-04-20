@@ -22,7 +22,6 @@ export const authorizationMiddleware = factory.createMiddleware(
       throw fail(401, "Unauthorized");
     }
 
-    console.log("NEXTs");
     await next();
   },
 );
