@@ -22,12 +22,12 @@
 		table.column({
 			accessor: 'websiteUrl',
 			header: 'Website',
-			cell: ({ value }) => createRender(Button, { variant: 'link', children: value, href: value })
+			cell: ({ value }) => createRender(Button, { variant: 'link', children: value, href: value, target: '_blank' })
 		}),
 		table.column({
 			accessor: 'githubUrl',
 			header: 'Github',
-			cell: ({ value }) => createRender(Button, { variant: 'link', children: value, href: value })
+			cell: ({ value }) => createRender(Button, { variant: 'link', children: value, href: value, target: '_blank' })
 		})
 		// table.column({
 		// 	accessor: ({ id }) => id,
