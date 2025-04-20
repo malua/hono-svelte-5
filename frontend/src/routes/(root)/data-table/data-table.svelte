@@ -1,15 +1,20 @@
 <script lang="ts">
-	import { createRender, createTable, Render, Subscribe } from 'svelte-headless-table';
+	import { Column, createRender, createTable, Render, Subscribe } from 'svelte-headless-table';
 	import { readable } from 'svelte/store';
 	import * as Table from '@/lib/components/ui/table';
 	import { Button } from '@/lib/components/ui/button';
 	import Tags from '../tags/tags.svelte';
+	import { api } from '@/lib/utils/api';
+	import userStore from '@/lib/stores/user.svelte';
+	import type { AnyPlugins } from 'svelte-headless-table/plugins';
 
 	const { software = [] } = $props();
 
+	const user = userStore.user;
+
 	const table = createTable(readable(software));
 
-	const columns = table.createColumns([
+	const columnDefinitions: Column<any, AnyPlugins>[] = [
 		table.column({
 			accessor: 'name',
 			header: 'Name'
@@ -29,12 +34,32 @@
 			header: 'Github',
 			cell: ({ value }) => createRender(Button, { variant: 'link', children: value, href: value, target: '_blank' })
 		})
-		// table.column({
-		// 	accessor: ({ id }) => id,
-		// 	header: '',
-		// 	cell: ({ value }) => createRender(Button, { variant: 'link', children: '' })
-		// })
-	]);
+	];
+
+	if (user) {
+		columnDefinitions.push(
+			table.column({
+				accessor: ({ id }) => id,
+				header: '',
+				cell: ({ value }) =>
+					createRender(Button, {
+						variant: 'outline',
+						children: 'Delete',
+						onclick: async () => {
+							await api.entry.delete[':id'].$delete({
+								param: {
+									id: value
+								}
+							});
+
+							window.location.reload();
+						}
+					})
+			})
+		);
+	}
+
+	const columns = table.createColumns(columnDefinitions);
 
 	const { headerRows, pageRows, tableAttrs, tableBodyAttrs } = table.createViewModel(columns);
 </script>

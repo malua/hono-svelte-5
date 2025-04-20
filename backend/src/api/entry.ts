@@ -118,6 +118,11 @@ export const deleteEntry = factory.createHandlers(async (c) => {
     return c.json({ error: "Invalid request ID" }, 400);
   }
 
+  // First, delete all tag references for this entry
+  await c.var.db
+    .delete(schema.entriesToTags)
+    .where(eq(schema.entriesToTags.entryId, requestId));
+
   const deleted = await c.var.db
     .delete(schema.entries)
     .where(eq(schema.entries.id, requestId!))
