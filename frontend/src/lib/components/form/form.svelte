@@ -31,17 +31,7 @@
 		if (selectedTags?.length) {
 			const newTags = selectedTags.filter((selectedTag) => !tagNames.includes(selectedTag));
 			for (const tag of newTags) {
-				await api.tag.add.$post(
-					{ json: { name: tag } },
-					{
-						fetch: (input: string | URL | globalThis.Request, init?: RequestInit) => {
-							return fetch(input, {
-								...init,
-								credentials: 'include'
-							});
-						}
-					}
-				);
+				await api.tag.add.$post({ json: { name: tag } });
 			}
 		} else {
 			toast.error('Tags are required');
@@ -65,17 +55,7 @@
 		};
 
 		await api.entry.add
-			.$post(
-				{ json: formData },
-				{
-					fetch: (input: string | URL | globalThis.Request, init?: RequestInit) => {
-						return fetch(input, {
-							...init,
-							credentials: 'include'
-						});
-					}
-				}
-			)
+			.$post({ json: formData })
 			.catch((error) => {
 				toast.error(error.message);
 			})

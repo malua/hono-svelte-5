@@ -9,8 +9,6 @@ import { cors } from "hono/cors";
 const app = factory
   .createApp()
   .use(dbMiddleware)
-  .use(authenticationMiddleware)
-  .use(authorizationMiddleware)
   .use(
     "/api/*",
     cors({
@@ -19,6 +17,8 @@ const app = factory
       allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     }),
   )
+  .use(authenticationMiddleware)
+  .use(authorizationMiddleware)
   .route("/api", router)
   .onError(errorMiddleware);
 
