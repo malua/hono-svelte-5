@@ -28,9 +28,9 @@ export const tokenActions = {
     setCookie(c, "access-token", token, {
       httpOnly: true,
       secure: true,
-      sameSite: "lax",
+      sameSite: "none",
       path: "/",
-      domain: PROD === true ? 'malua.dev' : undefined,
+      domain: PROD === "true" ? "malua.dev" : undefined,
       expires: new Date(gen.x_hours_from_now_in_ms(1)),
     });
   },
@@ -39,9 +39,9 @@ export const tokenActions = {
     setCookie(c, "user-data", encodeURI(JSON.stringify(user)), {
       httpOnly: false,
       secure: true,
-      sameSite: "lax",
+      sameSite: "none",
       path: "/",
-      domain: PROD === true ? 'malua.dev': undefined,
+      domain: PROD === "true" ? "malua.dev" : undefined,
       expires: new Date(gen.x_hours_from_now_in_ms(1)),
     });
   },
@@ -53,7 +53,13 @@ export const tokenActions = {
     return await tokenActions.verify(tokenCookie, c);
   },
   delete(c: Context) {
-    deleteCookie(c, "access-token");
-    deleteCookie(c, "user-data");
+    const { PROD } = env<{ PROD: string }>(c);
+
+    deleteCookie(c, "access-token", {
+      domain: PROD === "true" ? "malua.dev" : undefined,
+    });
+    deleteCookie(c, "user-data", {
+      domain: PROD === "true" ? "malua.dev" : undefined,
+    });
   },
 };
