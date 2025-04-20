@@ -7,6 +7,7 @@
 	import { api } from '@/lib/utils/api';
 	import userStore from '@/lib/stores/user.svelte';
 	import type { AnyPlugins } from 'svelte-headless-table/plugins';
+	import { Image } from '@/lib/components/ui/image';
 
 	const { software = [] } = $props();
 
@@ -15,6 +16,20 @@
 	const table = createTable(readable(software));
 
 	const columnDefinitions: Column<any, AnyPlugins>[] = [
+		table.column({
+			id: 'icon',
+			accessor: 'websiteUrl',
+			header: '',
+			cell: ({ value }) => {
+				// Assuming the favicon is at the root as favicon.ico
+				const url = new URL(value);
+				return createRender(Image, {
+					src: `https://favicone.com/${url.hostname}?s=24`,
+					alt: 'Favicon of ' + value,
+					class: ['w-6', 'h-6']
+				});
+			}
+		}),
 		table.column({
 			accessor: 'name',
 			header: 'Name'
