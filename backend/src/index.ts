@@ -14,7 +14,8 @@ const app = factory
   .use(
     "/api/*",
     cors({
-      origin: ["http://localhost:5173", "https://tools.malua.dev"],
+      origin: ["https://tools.malua.dev"],
+      credentials: true
     }),
   )
   .route("/api", router)

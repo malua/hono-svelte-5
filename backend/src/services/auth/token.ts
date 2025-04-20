@@ -28,6 +28,7 @@ export const tokenActions = {
       secure: true,
       sameSite: "strict",
       path: "/",
+      domain: '.malua.dev',
       expires: new Date(gen.x_hours_from_now_in_ms(1)),
     });
   },
@@ -37,6 +38,7 @@ export const tokenActions = {
       secure: true,
       sameSite: "strict",
       path: "/",
+      domain: '.malua.dev',
       expires: new Date(gen.x_hours_from_now_in_ms(1)),
     });
   },
