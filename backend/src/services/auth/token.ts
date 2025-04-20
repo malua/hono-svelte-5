@@ -3,6 +3,7 @@ import { gen } from "@backend/lib/utils/generator";
 import { deleteCookie, getCookie, setCookie } from "hono/cookie";
 import { sign, verify } from "hono/jwt";
 import { JWTPayload } from "hono/utils/jwt/types";
+import { env } from "hono/adapter";
 
 export const tokenActions = {
   async create(jwt: JWTPayload & { user: NonNullable<EnvUser> }, c: Context) {
@@ -23,22 +24,24 @@ export const tokenActions = {
   },
 
   saveToCookie(token: string, c: Context) {
+    const { PROD } = env<{ PROD: string }>(c);
     setCookie(c, "access-token", token, {
       httpOnly: true,
       secure: true,
-      sameSite: "strict",
+      sameSite: "lax",
       path: "/",
-      domain: '.malua.dev',
+      domain: PROD === true ? 'malua.dev' : undefined,
       expires: new Date(gen.x_hours_from_now_in_ms(1)),
     });
   },
   saveUserToCookie(user: EnvUser, c: Context) {
+    const { PROD } = env<{ PROD: string }>(c);
     setCookie(c, "user-data", encodeURI(JSON.stringify(user)), {
       httpOnly: false,
       secure: true,
-      sameSite: "strict",
+      sameSite: "lax",
       path: "/",
-      domain: '.malua.dev',
+      domain: PROD === true ? 'malua.dev': undefined,
       expires: new Date(gen.x_hours_from_now_in_ms(1)),
     });
   },
