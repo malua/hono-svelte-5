@@ -7,7 +7,7 @@ export default defineConfig({
 	server: {
 		proxy: {
 			'/api': {
-				target: process.env.NODE_ENV === 'production' ? 'https://backend.malua.workers.dev' : 'http://localhost:8000',
+				target: 'http://localhost:8000',
 				changeOrigin: true
 			}
 		}
