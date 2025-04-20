@@ -5,6 +5,6 @@ export default defineConfig({
   out: "./migrations",
   dialect: "sqlite",
   dbCredentials: {
-    url: ".wrangler/state/v3/d1/miniflare-D1DatabaseObject/a86f68350a2049cfb9ccc403a4d90a90ce260fbee30ba8a76dc6e8322c15ea1e.sqlite",
+    url: ".wrangler/state/v3/d1/miniflare-D1DatabaseObject/72e539ebcfbe5638569740ca360ca7fe647a30c46f06919442af7b9cbfc99e49.sqlite",
   },
 });

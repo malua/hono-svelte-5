@@ -20,7 +20,6 @@ export const users = sqliteTable("user", {
   name: text().notNull().notNull().default(""),
   email: text().notNull().unique(),
   hashedPassword: text().notNull(),
-  isAdmin: integer({ mode: "boolean" }).notNull().default(false),
   createdAt,
 });
 

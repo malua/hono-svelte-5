@@ -5,8 +5,7 @@ import { gen } from "@backend/lib/utils/generator";
 import { z } from "zod";
 import { auth } from "@backend/services/auth";
 import { validators } from "@backend/lib/utils/validators";
-
-const allowedSignupEmails = ["lukas.mayr@posteo.at"];
+import { env } from "hono/adapter";
 
 export const signUp = factory.createHandlers(
   zValidator(
@@ -15,13 +14,15 @@ export const signUp = factory.createHandlers(
       name: validators.name(),
       email: validators.email(),
       password: validators.password(),
+      inviteCode: z.string(),
     }),
   ),
   async (c) => {
     const requestPayload = c.req.valid("json");
 
-    if (!allowedSignupEmails.includes(requestPayload.email)) {
-      return c.json({ error: "Email not allowed" }, 400);
+    const { INVITE_CODE } = env<{ INVITE_CODE: string }>(c);
+    if (requestPayload.inviteCode !== INVITE_CODE) {
+      return c.json({ error: "Invalid invite code" }, 400);
     }
 
     const existingUser = await c.var.db.query.users.findFirst({

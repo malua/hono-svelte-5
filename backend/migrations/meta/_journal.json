@@ -5,36 +5,15 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1741196989676,
-      "tag": "0000_minor_loners",
+      "when": 1745138770948,
+      "tag": "0000_workable_typhoid_mary",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "6",
-      "when": 1744567789805,
-      "tag": "0001_thankful_scarecrow",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1744967500304,
-      "tag": "0002_reflective_wolfpack",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "6",
-      "when": 1744968496157,
-      "tag": "0003_uneven_thunderbolts",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "6",
-      "when": 1744980786293,
-      "tag": "0004_icy_shockwave",
+      "when": 1745139783682,
+      "tag": "0001_clammy_sandman",
       "breakpoints": true
     }
   ]

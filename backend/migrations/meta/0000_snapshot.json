@@ -1,11 +1,11 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "fba0c594-faf6-4319-801b-7bdcf8cad39e",
+  "id": "e0e17418-360d-43f1-ba31-08327714dd46",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
-    "post": {
-      "name": "post",
+    "entries": {
+      "name": "entries",
       "columns": {
         "id": {
           "name": "id",
@@ -14,42 +14,28 @@
           "notNull": true,
           "autoincrement": false
         },
-        "title": {
-          "name": "title",
+        "name": {
+          "name": "name",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "description": {
-          "name": "description",
+        "websiteUrl": {
+          "name": "websiteUrl",
           "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "''"
-        },
-        "content": {
-          "name": "content",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "authorId": {
-          "name": "authorId",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "likes": {
-          "name": "likes",
-          "type": "integer",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false,
-          "default": 0
+          "default": "''"
+        },
+        "githubUrl": {
+          "name": "githubUrl",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": "''"
         },
         "created_at": {
           "name": "created_at",
@@ -69,13 +55,50 @@
         }
       },
       "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "entries_to_tags": {
+      "name": "entries_to_tags",
+      "columns": {
+        "entryId": {
+          "name": "entryId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "tagId": {
+          "name": "tagId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
       "foreignKeys": {
-        "post_authorId_user_id_fk": {
-          "name": "post_authorId_user_id_fk",
-          "tableFrom": "post",
-          "tableTo": "user",
+        "entries_to_tags_entryId_entries_id_fk": {
+          "name": "entries_to_tags_entryId_entries_id_fk",
+          "tableFrom": "entries_to_tags",
+          "tableTo": "entries",
           "columnsFrom": [
-            "authorId"
+            "entryId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "entries_to_tags_tagId_tags_id_fk": {
+          "name": "entries_to_tags_tagId_tags_id_fk",
+          "tableFrom": "entries_to_tags",
+          "tableTo": "tags",
+          "columnsFrom": [
+            "tagId"
           ],
           "columnsTo": [
             "id"
@@ -84,6 +107,38 @@
           "onUpdate": "no action"
         }
       },
+      "compositePrimaryKeys": {
+        "entries_to_tags_entryId_tagId_pk": {
+          "columns": [
+            "entryId",
+            "tagId"
+          ],
+          "name": "entries_to_tags_entryId_tagId_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "tags": {
+      "name": "tags",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}

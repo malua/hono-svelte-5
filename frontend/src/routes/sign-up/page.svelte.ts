@@ -6,9 +6,12 @@ class SighUpPageHandler {
 	name = $state('');
 	email = $state('');
 	password = $state('');
+	inviteCode = $state('');
 
 	signUp = async () => {
-		const serverRes = await api.user.signUp.$post({ json: { email: this.email, password: this.password, name: this.name } });
+		const serverRes = await api.user.signUp.$post({
+			json: { email: this.email, password: this.password, name: this.name, inviteCode: this.inviteCode }
+		});
 		const serverResData = await serverRes.json();
 		if (!serverRes.ok) {
 			toastResponseError(serverResData);
