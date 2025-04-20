@@ -31,7 +31,17 @@
 		if (selectedTags?.length) {
 			const newTags = selectedTags.filter((selectedTag) => !tagNames.includes(selectedTag));
 			for (const tag of newTags) {
-				await api.tag.add.$post({ json: { name: tag } });
+				await api.tag.add.$post(
+					{ json: { name: tag } },
+					{
+						fetch: (input: string | URL | globalThis.Request, init?: RequestInit) => {
+							return fetch(input, {
+								...init,
+								credentials: 'include'
+							});
+						}
+					}
+				);
 			}
 		} else {
 			toast.error('Tags are required');
@@ -55,7 +65,17 @@
 		};
 
 		await api.entry.add
-			.$post({ json: formData })
+			.$post(
+				{ json: formData },
+				{
+					fetch: (input: string | URL | globalThis.Request, init?: RequestInit) => {
+						return fetch(input, {
+							...init,
+							credentials: 'include'
+						});
+					}
+				}
+			)
 			.catch((error) => {
 				toast.error(error.message);
 			})
@@ -79,7 +99,16 @@
 
 	<div class="grid w-full items-center gap-1.5">
 		<Label for="tags">Tags*</Label>
-		<MultiSelect id="tags-select" options={tagNames} bind:selected={selectedTags} placeholder="Choose tags or create new ones" allowUserOptions="append" required let:idx let:option>
+		<MultiSelect
+			id="tags-select"
+			options={tagNames}
+			bind:selected={selectedTags}
+			placeholder="Choose tags or create new ones"
+			allowUserOptions="append"
+			required
+			let:idx
+			let:option
+		>
 			<span id={idx}>{option}</span>
 		</MultiSelect>
 	</div>

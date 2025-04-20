@@ -15,7 +15,8 @@ const app = factory
     "/api/*",
     cors({
       origin: ["https://tools.malua.dev"],
-      credentials: true
+      credentials: true,
+      allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     }),
   )
   .route("/api", router)
