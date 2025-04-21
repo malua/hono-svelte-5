@@ -4,8 +4,10 @@
 	const { tags } = $props();
 </script>
 
-{#each tags as tag (tag.name)}
-	<Badge variant="outline" class="not-first-of-type:ml-1">
-		{tag.name}
-	</Badge>
-{/each}
+<div class="flex flex-wrap gap-2">
+	{#each tags as tag (tag.name)}
+		<Badge variant="outline">
+			{tag.name}
+		</Badge>
+	{/each}
+</div>
